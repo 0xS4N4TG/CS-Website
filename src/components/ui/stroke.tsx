@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
-import Footer from "@/src/components/common/Footer"
+
 import ImageTrail from "@/components/ImageTrail";
 
 
