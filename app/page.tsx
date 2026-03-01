@@ -14,7 +14,7 @@ import TeamCard from "@/src/components/common/TeamCard";
 export default function Home() {
   return (
     <>
-      {/* 🔥 3D HERO SECTION */}
+     
       <section
         style={{
           height: "100vh",
@@ -23,7 +23,7 @@ export default function Home() {
         }}
       >
         <Canvas camera={{ position: [0, 2, 10], fov: 45 }}>
-          {/* Lighting */}
+          
           <ambientLight intensity={1.5} />
           <directionalLight position={[5, 5, 5]} intensity={3} />
 
@@ -32,8 +32,6 @@ export default function Home() {
           </Suspense>
         </Canvas>
       </section>
-
-      {/* 🔥 Rest of Website (normal scroll works) */}
       <TargetCursor
         spinDuration={2}
         hideDefaultCursor
