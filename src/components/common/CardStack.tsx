@@ -28,7 +28,7 @@ export default function CardStack() {
 
   return (
     <section className={styles.container}>
-      
+     {/* <h1 className={styles.heading}>IEEE CS</h1> */}
       <div className={`${styles.cards} ${open ? styles.open : ""}`}>
         {images.map((src, index) => (
           <div key={index} className={styles.card}>

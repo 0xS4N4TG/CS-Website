@@ -34,7 +34,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   const tickerFnRef = useRef<(() => void) | null>(null);
   const activeStrengthRef = useRef({ current: 0 });
 
-  // ✅ SSR SAFE MOBILE DETECTION
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
