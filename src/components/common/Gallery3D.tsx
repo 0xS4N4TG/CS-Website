@@ -2,18 +2,12 @@
 import { useEffect, useRef, useCallback } from 'react';
 import styles from './Gallery3D.module.css';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface SlotConfig {
-  /** Destination center X relative to container — where the card travels toward */
   destX: number;
-  /** Destination center Y relative to container */
   destY: number;
-  /** Image URL */
   img: string;
-  /** Initial progress offset (0–1) so cards are staggered on mount */
   t0: number;
-  /** Speed: progress units per millisecond */
   spd: number;
 }
 
@@ -24,21 +18,16 @@ interface CardState {
 }
 
 export interface Gallery3DProps {
-  /** Title rendered in the center */
+  
   title?: string;
-  /** Exactly 5 image URLs */
+ 
   images?: [string, string, string, string, string];
-  /** Base card width in px. Defaults to 32% of container width (max 380px) */
   cardWidth?: number;
-  /** Card height / width ratio */
   cardAspect?: number;
-  /** How far past the container edge destinations sit (fraction of card size) */
   overflowFraction?: number;
-  /** Optional className forwarded to the root element */
   className?: string;
 }
 
-// ─── Defaults ────────────────────────────────────────────────────────────────
 
 const DEFAULT_IMAGES: [string, string, string, string, string] = [
   'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=760&q=85',
@@ -48,15 +37,12 @@ const DEFAULT_IMAGES: [string, string, string, string, string] = [
   'https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?w=760&q=85',
 ];
 
-/** Cubic ease-in — cards accelerate as they approach, mimicking real perspective */
 function easeIn(t: number): number {
   return t * t * t;
 }
 
-/** How tiny the card looks when it first spawns at the "far" vanishing point */
 const SCALE_FAR = 0.04;
 
-// ─── Component ───────────────────────────────────────────────────────────────
 
 export default function Gallery3D({
   title = 'GALLERY 3D',
@@ -70,7 +56,6 @@ export default function Gallery3D({
   const cursorRef = useRef<HTMLDivElement>(null);
   const rafRef    = useRef<number>(0);
 
-  /** Build the 5 slot destinations from the container's own dimensions */
   const buildSlots = useCallback(
     (cw: number, ch: number, bw: number, bh: number): SlotConfig[] => {
       const cx = cw / 2;
@@ -98,7 +83,6 @@ export default function Gallery3D({
     const scene = sceneRef.current;
     if (!scene) return;
 
-    // Use the container's own dimensions — not the window
     const { width: cw, height: ch } = scene.getBoundingClientRect();
     const cx = cw / 2;
     const cy = ch / 2;
@@ -108,7 +92,6 @@ export default function Gallery3D({
 
     const slots = buildSlots(cw, ch, bw, bh);
 
-    // ── Build card DOM ──────────────────────────────────────────────────────
     const cardStates: CardState[] = slots.map(slot => {
       const el = document.createElement('div');
       el.className = styles.card;
@@ -131,7 +114,6 @@ export default function Gallery3D({
       return { el, slot, t: slot.t0 };
     });
 
-    // ── Animation loop ──────────────────────────────────────────────────────
     let last: number | null = null;
 
     function tick(now: number) {
@@ -145,11 +127,9 @@ export default function Gallery3D({
 
         const et = easeIn(c.t);
 
-        // Position: interpolate from container center → corner destination
         const px = cx + (c.slot.destX - cx) * et;
         const py = cy + (c.slot.destY - cy) * et;
 
-        // Scale: tiny vanishing point → full size
         const scale = SCALE_FAR + (1 - SCALE_FAR) * et;
 
         // Opacity: fade in quickly, hold, fade out near exit
@@ -158,7 +138,6 @@ export default function Gallery3D({
         else if (c.t > 0.82) opacity = 1 - (c.t - 0.82) / 0.18;
         else                  opacity = 1;
 
-        // top-left of card so its center lands at (px, py)
         const left = px - bw / 2;
         const top  = py - bh / 2;
 
@@ -171,19 +150,16 @@ export default function Gallery3D({
 
     rafRef.current = requestAnimationFrame(tick);
 
-    // ── Cursor — relative to container ─────────────────────────────────────
     function onMouseMove(e: MouseEvent) {
       const cur = cursorRef.current;
       if (!cur) return;
       const rect = scene.getBoundingClientRect();
-      // Cursor position relative to the container
       cur.style.left = `${e.clientX - rect.left}px`;
       cur.style.top  = `${e.clientY - rect.top}px`;
     }
 
     scene.addEventListener('mousemove', onMouseMove);
 
-    // ── Cleanup ─────────────────────────────────────────────────────────────
     return () => {
       cancelAnimationFrame(rafRef.current);
       scene.removeEventListener('mousemove', onMouseMove);
