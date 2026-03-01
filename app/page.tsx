@@ -6,13 +6,23 @@ import HorizontalGallery from "@/src/components/gallery/HorizontalGallery";
 import TargetCursor from "@/src/components/common/TargetCursor";
 import TeamCard from "@/src/components/common/TeamCard";
 import DotGrid from "@/components/DotGrid";
-
+import ScrollGrid from "@/src/components/common/ScrollGrid";
 
 
 export default function Home() {
   return (
     <>
-
+  <DotGrid
+    dotSize={2}
+    gap={16}
+    baseColor="#121212"
+    activeColor="#faa41a"
+    proximity={100}
+    shockRadius={370}
+    shockStrength={5}
+    resistance={1100}
+    returnDuration={1.5}
+  />
     
     <TargetCursor 
         spinDuration={2}
@@ -23,7 +33,8 @@ export default function Home() {
     <div>
       <Skiper19 />
       <ImageHover/>
-      
+<ScrollGrid/>
+
       <TeamCard
         image="https://images.pexels.com/photos/34408249/pexels-photo-34408249.jpeg"
         name="John Doe"
@@ -52,3 +63,4 @@ export default function Home() {
     </>
   );
 }
+  
