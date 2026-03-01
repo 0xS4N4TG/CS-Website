@@ -2,9 +2,8 @@
 
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
-import { OrbitControls } from "@react-three/drei";
-
 import TextModel from "@/src/components/ui/TextModel";
+
 import { Skiper19 } from "@/src/components/ui/stroke";
 import ImageHover from "@/src/components/common/ImageHover";
 import CardStack from "@/src/components/common/CardStack";
@@ -16,20 +15,25 @@ export default function Home() {
   return (
     <>
       {/* 🔥 3D HERO SECTION */}
-      <section style={{ height: "100vh" }}>
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+      <section
+        style={{
+          height: "100vh",
+          width: "100%",
+          background: "black",
+        }}
+      >
+        <Canvas camera={{ position: [0, 2, 10], fov: 45 }}>
+          {/* Lighting */}
           <ambientLight intensity={1.5} />
           <directionalLight position={[5, 5, 5]} intensity={3} />
 
           <Suspense fallback={null}>
             <TextModel />
           </Suspense>
-
-          <OrbitControls enableZoom={false} />
         </Canvas>
       </section>
 
-      {/* 🔥 Rest of website (normal scroll works now) */}
+      {/* 🔥 Rest of Website (normal scroll works) */}
       <TargetCursor
         spinDuration={2}
         hideDefaultCursor
