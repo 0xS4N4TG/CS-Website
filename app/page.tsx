@@ -5,6 +5,7 @@ import Gallery3D from "@/src/components/common/Gallery3D";
 import HorizontalGallery from "@/src/components/gallery/HorizontalGallery";
 import TargetCursor from "@/src/components/common/TargetCursor";
 import TeamCard from "@/src/components/common/TeamCard";
+import ScrollGrid from "@/src/components/common/ScrollGrid";
 
 
 
@@ -22,7 +23,7 @@ export default function Home() {
         <Skiper19 />
         <ImageHover />
 
-        
+        <ScrollGrid />
 
         <TeamCard
           image="https://images.pexels.com/photos/34408249/pexels-photo-34408249.jpeg"
