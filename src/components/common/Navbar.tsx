@@ -17,7 +17,7 @@ function NorrisText({ text, cascadeIndex }: { text: string; cascadeIndex: number
     const timerIn = setTimeout(() => setAnimate(true), 150);
     // Let the animation fade/revert after 1.5 seconds as requested
     const timerOut = setTimeout(() => setAnimate(false), 1650);
-    
+
     return () => {
       clearTimeout(timerIn);
       clearTimeout(timerOut);
@@ -143,21 +143,21 @@ export default function Navbar() {
             <div className={style["mobile-links"]}>
               {navItems.map((item, i) => {
                 return (
-                <div
-                  key={item.href}
-                  className={style["mobile-link-wrapper"]}
-                >
-                  <Link
-                    href={item.href}
-                    className={`${style["mobile-link"]} ${
-                      pathname === item.href ? style["mobile-active"] : ""
-                    }`}
-                    onClick={() => setMenuOpen(false)}
+                  <div
+                    key={item.href}
+                    className={style["mobile-link-wrapper"]}
                   >
-                    <NorrisText text={item.name.toUpperCase()} cascadeIndex={i} />
-                  </Link>
-                </div>
-              )})}
+                    <Link
+                      href={item.href}
+                      className={`${style["mobile-link"]} ${pathname === item.href ? style["mobile-active"] : ""
+                        }`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <NorrisText text={item.name.toUpperCase()} cascadeIndex={i} />
+                    </Link>
+                  </div>
+                )
+              })}
             </div>
 
             {/* Bottom Footer Text */}

@@ -7,6 +7,7 @@ import TargetCursor from "@/src/components/common/TargetCursor";
 const TeamCard = dynamic(() => import("@/src/components/common/TeamCard"), { ssr: false });
 const HorizontalGallery = dynamic(() => import("@/src/app/gallery/HorizontalGallery"), { ssr: false });
 const CardStack = dynamic(() => import("@/src/components/common/CardStack"), { ssr: false });
+const CascadingCards = dynamic(() => import("@/src/components/common/CascadingCards"), { ssr: false });
 
 import LineBackground from "@/components/LineBackground";
 
@@ -101,8 +102,11 @@ export default function Home() {
       <div>
         <CardStack />
       </div>
+      <div>
+        <CascadingCards />
+      </div>
 
-      
+
     </>
   );
 }
