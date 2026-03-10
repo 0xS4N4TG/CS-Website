@@ -8,6 +8,8 @@ import TopographicBackground from "@/components/LineBackground";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import style from "./Navbar.module.css";
+import { useRouter } from "next/navigation";
+import TargetCursor from "@/src/components/common/TargetCursor";
 
 function NorrisText({ text, cascadeIndex }: { text: string; cascadeIndex: number }) {
   const [animate, setAnimate] = useState(false);
@@ -44,6 +46,8 @@ function NorrisText({ text, cascadeIndex }: { text: string; cascadeIndex: number
 }
 
 export default function Navbar() {
+  const [cursorActive, setCursorActive] = useState(false);
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -63,7 +67,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "About", href: "about" },
+    { name: "About", href: "/about" },
     { name: "Team", href: "/team" },
     { name: "Events", href: "/events" },
     { name: "Blogs", href: "https://medium.com/@ieeecs" },
@@ -74,7 +78,20 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`${style.navbar} ${scrolled ? style.fixed : ""}`}>
+    {cursorActive && (
+      <TargetCursor
+        targetSelector=".cursor-target"
+        spinDuration={2}
+        hideDefaultCursor
+        parallaxOn
+        hoverDuration={0.2}
+      />
+    )}
+      <nav
+        className={`${style.navbar} ${scrolled ? style.fixed : ""}`}
+        onMouseEnter={() => setCursorActive(true)}
+        onMouseLeave={() => setCursorActive(false)}
+      >
         <div className={style["nav-container"]}>
           <div className={style.logo}>
             ieee
@@ -93,19 +110,17 @@ export default function Navbar() {
 
           <ul className={style["nav-menu"]}>
             {navItems.map((item) => (
-              <li
-                key={item.href}
-                className={pathname === item.href ? style.active : ""}
-              >
-                <Link href={item.href}>
-                  <DecryptedText
-                    text={item.name}
-                    speed={70}
-                    maxIterations={9}
-                    className={style["nav-text"]}
-                    encryptedClassName={style["nav-encrypted"]}
-                  />
-                </Link>
+              <li key={item.href}>
+                <button
+                  className={`cursor-target ${style["nav-button"]} ${
+                    pathname === item.href ? style.active : ""
+                  }`}
+                  onClick={() => router.push(item.href)}
+                >
+                  <p>
+                    {item.name}
+                  </p>
+                </button>
               </li>
             ))}
           </ul>

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "@/src/components/common/CardStack.module.css";
 
 const images = [
@@ -14,26 +14,43 @@ const images = [
 
 export default function CardStack() {
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const raf = requestAnimationFrame(() => {
-      const timer = setTimeout(() => {
-        setOpen(true);
-      }, 1000);
-      return () => clearTimeout(timer);
-    });
-    return () => cancelAnimationFrame(raf);
+    let timer: NodeJS.Timeout;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          timer = setTimeout(() => {
+            setOpen(true);
+          }, 500);
+
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   return (
-    <section className={styles.container}>
-     {/* <h1 className={styles.heading}>IEEE CS</h1> */}
+    <section ref={containerRef} className={styles.container}>
       <div className={`${styles.cards} ${open ? styles.open : ""}`}>
         {images.map((src, index) => (
           <div key={index} className={styles.card}>
             <img
               src={src}
               alt={`card-${index}`}
+              draggable="false"
               loading="eager"
               decoding="async"
               style={{

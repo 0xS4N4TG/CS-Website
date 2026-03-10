@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 28px;
+    
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
@@ -44,6 +44,7 @@
     line-height: 1.2;
     font-size: clamp(0.75rem, 2vw, 1rem);
     white-space: nowrap;
+    padding: 18px 28px;
 }
 
 .logo span {
@@ -54,12 +55,22 @@
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 35px;
+    
+    padding-right: 22px;
 }
 
-.nav-menu li {
+.nav-menu li button{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: none;
+    font: inherit;
+    padding: 18px 20px;
+  
+}
+
+.nav-menu li button p{
     color: #aaa;
-    cursor: pointer;
     position: relative;
     transition: 0.3s;
     text-transform: uppercase;
@@ -67,25 +78,26 @@
     font-size: 14px;
 }
 
-.nav-menu li:hover {
+.nav-menu li button:hover {
     color: white;
 }
 
 /* ACTIVE DOT */
-.nav-menu li.active {
-    color: #fbbf24;
-}
 
-.nav-menu li.active::after {
+.nav-menu li button.active::after {
     content: "";
     position: absolute;
     width: 6px;
     height: 6px;
     background: #fbbf24;
     border-radius: 50%;
-    left: 50%;
+    /* left: 50%; */
     transform: translateX(-50%);
-    bottom: -12px;
+    bottom: 12px;
+}
+
+.nav-menu li button.active p{
+    color: #fbbf24;
 }
 
 /* HAMBURGER */

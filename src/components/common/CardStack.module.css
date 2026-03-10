@@ -39,7 +39,7 @@
     height: 50vmin;
     border-radius: 5vmin;
     overflow: hidden;
-    transition: transform 1s ease;
+    transition: transform 0.7s ease;
     transform:
         rotate(var(--rotate)) translateX(calc(var(--translateX) + var(--offsetTranslateX))) translateY(calc(var(--translateY) + var(--offsetY)));
 }

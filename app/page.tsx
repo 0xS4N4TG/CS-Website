@@ -55,13 +55,6 @@ export default function Home() {
         />
       </div>
 
-      <TargetCursor
-        spinDuration={2}
-        hideDefaultCursor
-        parallaxOn
-        hoverDuration={0.2}
-      />
-
       <AnimatePresence mode="wait">
         {showIntro ? (
           <motion.div
