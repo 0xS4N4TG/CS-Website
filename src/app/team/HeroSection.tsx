@@ -153,7 +153,7 @@ export default function HeroSection() {
           end: '+=1450',
           scrub: 0.35,
           pin: true,
-          pinSpacing: true,
+          pinSpacing: true, // Restored to prevent succeeding content from scrolling underneath
           anticipatePin: 1,
         },
       })
@@ -280,13 +280,13 @@ export default function HeroSection() {
         <div className="lg:hidden">
           <div
             ref={mobileHeroRef}
-            className="sticky top-0 z-20 h-screen overflow-hidden"
+            className="sticky top-0 z-20 h-screen overflow-hidden pointer-events-none"
           >
             {/* Mobile collage background */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 pointer-events-auto">
               <CollageGrid side="left" />
             </div>
-            <div className="absolute inset-0 bg-black/35" />
+            <div className="absolute inset-0 bg-black/35 pointer-events-none" />
 
             <div className="absolute inset-0 flex items-center justify-center z-30">
               <div

@@ -24,21 +24,13 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       smoothWheel: true,
       wheelMultiplier: 0.8,
       touchMultiplier: 1.5,
+      // allow touch to be smooth properly
+      syncTouch: true,
     })
 
     lenisRef.current = lenis
 
     // Proxy ScrollTrigger to use Lenis scroll position (keeps animations moving with scroll)
-    ScrollTrigger.scrollerProxy(document.documentElement, {
-      scrollTop(value) {
-        if (value !== undefined) lenis.scrollTo(value)
-        return lenis.scroll
-      },
-      getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
-      },
-    })
-
     lenis.on('scroll', ScrollTrigger.update)
 
     // Use GSAP ticker to drive Lenis instead of a raw rAF loop
