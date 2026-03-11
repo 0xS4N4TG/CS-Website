@@ -53,8 +53,11 @@ export default function TopographicBackground({
       const w = W();
       const h = H();
 
-      ctx.fillStyle = backgroundColor;
-      ctx.fillRect(0, 0, w, h);
+      ctx.clearRect(0, 0, w, h);
+      if (backgroundColor !== "transparent") {
+          ctx.fillStyle = backgroundColor;
+          ctx.fillRect(0, 0, w, h);
+      }
 
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 0.9;
