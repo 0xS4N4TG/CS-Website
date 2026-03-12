@@ -200,7 +200,7 @@ export default function HeroSection() {
 
   return (
     <div ref={heroRef} className="relative w-screen overflow-x-hidden text-white bg-black">
-      <div ref={ourStoryWrapper} className="relative h-screen z-10 bg-black">
+      <div ref={ourStoryWrapper} className="relative min-h-[140vh] z-10 bg-black">
 
         {/* EC section */}
         <div
@@ -212,8 +212,8 @@ export default function HeroSection() {
             style={{
               width: '100%', minHeight: '100vh', height: 'auto',
               display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center',
-              padding: '60px 4vw', opacity: 1,
+              alignItems: 'center', justifyContent: 'flex-start',
+              padding: '90px 4vw 180px', opacity: 1,
             }}
           >
             {/* Glow */}
