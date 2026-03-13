@@ -3,12 +3,12 @@
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import Carousel from "@/components/Carousel";
-const TeamCard = dynamic(() => import("@/src/components/common/TeamCard"), { ssr: false });
+import FAQ from "@/components/FAQ";
+const TeamCard = dynamic(() => import("@/src/app/team/TeamCard"), { ssr: false });
 const HorizontalGallery = dynamic(() => import("@/src/app/gallery/HorizontalGallery"), { ssr: false });
 const CardStack = dynamic(() => import("@/src/components/common/CardStack"), { ssr: false });
-const CascadingCards = dynamic(() => import("@/src/components/common/CascadingCards"), { ssr: false });
-const ImpactText = dynamic(() => import("@/src/components/common/ImpactText"), { ssr: false });
+const ProjectCard = dynamic(() => import("@/src/components/common/ProjectCard"), { ssr: false });
+const LandingText = dynamic(() => import("@/src/components/common/LandingText"), { ssr: false });
 
 import LineBackground from "@/components/LineBackground";
 import Newsletter from "@/components/Newsletter";
@@ -92,7 +92,7 @@ export default function Home() {
 
 */}
       <div>
-        <ImpactText />
+        <LandingText />
       </div>
       <div className="mt-32">
         <HorizontalGallery />
@@ -101,12 +101,12 @@ export default function Home() {
         <CardStack />
       </div>
       <div>
-        <CascadingCards />
+        <ProjectCard />
       </div>
 
 
       <div>
-        <Carousel
+        <FAQ
 
         />
       </div>

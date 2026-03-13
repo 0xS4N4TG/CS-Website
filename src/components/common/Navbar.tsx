@@ -111,7 +111,7 @@ export default function Navbar() {
 
   return (
     <>
-      
+
 
       <header
         className={`${style.header} ${scrolled ? style.scrolled : ""}`}
