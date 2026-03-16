@@ -25,19 +25,21 @@ export default function LogoScrollWrapper() {
         const logoW = () => el.offsetWidth;
         const logoH = () => el.offsetHeight;
 
-        const startX = () => vw() - logoW() - 70;          
-        const startY = () => vh() * 0.5 - logoH() * 0.5;  
+        const xShift = () => vw() < 768 ? vw() * 0.10 : 0;
 
-        const dropX = () => vw() - logoW() - 66;
+        const startX = () => vw() - logoW() - 70 + xShift();
+        const startY = () => vh() * 0.5 - logoH() * 0.5;
+
+        const dropX = () => vw() - logoW() - 66 + xShift();
         const dropY = () => vh() * 0.58 - logoH() * 0.5;
 
-        const sweepX = () => vw() * 0.46 - logoW() * 0.5;
+        const sweepX = () => vw() * 0.46 - logoW() * 0.5 + xShift();
         const sweepY = () => vh() * 0.64 - logoH() * 0.5;
 
-        const hookX = () => vw() * 0.18 - logoW() * 0.5;
+        const hookX = () => vw() * 0.18 - logoW() * 0.5 + xShift();
         const hookY = () => vh() * 0.74 - logoH() * 0.5;
 
-        const endX = () => vw() * 0.10 - logoW() * 0.5;
+        const endX = () => vw() * 0.10 - logoW() * 0.5 + xShift();
         const endY = () => vh() * 0.88 - logoH() * 0.5;
 
         gsap.set(el, { x: startX(), y: startY(), autoAlpha: 1 });
