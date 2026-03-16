@@ -13,12 +13,14 @@
 .grid {
     display: grid;
     grid-template-columns: 28% 40% 32%;
+    grid-template-areas: "title photo quote";
     min-height: 100vh;
     align-items: center;
 }
 
 /*Left: label + title*/
 .titleCol {
+    grid-area: title;
     padding: 8vh 5vw 8vh calc((100vw - min(95vw, 1300px)) / 2 + 28px);
     display: flex;
     flex-direction: column;
@@ -47,6 +49,7 @@
 
 /*Center: full-height portrait*/
 .photoCol {
+    grid-area: photo;
     position: relative;
     height: 100vh;
     align-self: stretch;
@@ -89,6 +92,7 @@
 
 /* ── Right: quote ── */
 .quoteCol {
+    grid-area: quote;
     padding: 8vh calc((100vw - min(95vw, 1300px)) / 2 + 28px) 8vh 4vw;
     display: flex;
     flex-direction: column;
@@ -122,4 +126,93 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-top: -0.75rem;
+}
+
+/* ── Tablet (≤ 1024px): 2-column, photo right spans full height ── */
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "title photo"
+            "quote photo";
+        align-items: start;
+        min-height: auto;
+    }
+
+    .photoCol {
+        height: 100%;
+        min-height: 70vh;
+    }
+
+    .titleCol {
+        padding: 8vh 4vw 2vh 6vw;
+    }
+
+    .quoteCol {
+        padding: 2vh 4vw 8vh 6vw;
+        align-self: start;
+    }
+}
+
+/* ── Mobile (≤ 768px): single column, photo → title → quote ── */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "photo"
+            "title"
+            "quote";
+        min-height: auto;
+        align-items: start;
+    }
+
+    .photoCol {
+        height: 60vh;
+        min-height: 280px;
+    }
+
+    .titleCol {
+        padding: 5vw 8vw 3vw;
+    }
+
+    .quoteCol {
+        padding: 0 8vw 10vw;
+    }
+
+    /* No adjacent columns — remove side fades, keep bottom fade */
+    .photoFadeLeft,
+    .photoFadeRight {
+        display: none;
+    }
+
+    /* Bump clamp minimums — vw-based preferred values too small at 375px */
+    .title {
+        font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+
+    .quote {
+        font-size: clamp(1rem, 3.5vw, 1.15rem);
+        text-align: left;
+    }
+
+    .name {
+        font-size: clamp(0.9rem, 2.8vw, 1rem);
+        text-align: left;
+    }
+
+    .role {
+        font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+        text-align: left;
+    }
+}
+
+/* ── Small mobile (≤ 480px): tighter padding ── */
+@media (max-width: 480px) {
+    .titleCol {
+        padding: 6vw 6vw 2vw;
+    }
+
+    .quoteCol {
+        padding: 0 6vw 12vw;
+    }
 }

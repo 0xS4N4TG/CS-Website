@@ -34,7 +34,7 @@ export default function ImpactText() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@700;800;900&display=swap');
       `}</style>
-      <section className="w-full py-6 lg:py-10 flex justify-center items-center px-4 md:px-8 bg-transparent relative z-10 selection:bg-[#F4A119] selection:text-black">
+      <section className="w-full min-h-screen pt-[clamp(80px,12vw,140px)] pb-10 flex items-center justify-center px-4 md:px-8 bg-transparent relative z-10 selection:bg-[#F4A119] selection:text-black">
         <div className="max-w-[85rem] mx-auto text-center flex flex-col items-center justify-center text-[#e4e4e1]">
           <motion.h2
             variants={container}
@@ -101,7 +101,6 @@ export default function ImpactText() {
           </motion.h2>
         </div>
       </section>
-      <br /><br /><br /><br /><br />
     </>
   );
 }

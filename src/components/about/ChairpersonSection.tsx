@@ -62,7 +62,7 @@ export default function ChairpersonSection() {
                         src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
                         alt="IEEE CS MUJ Chairperson"
                         fill
-                        sizes="40vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
                         className={`object-cover object-top ${styles.photo}`}
                         priority={false}
                     />
