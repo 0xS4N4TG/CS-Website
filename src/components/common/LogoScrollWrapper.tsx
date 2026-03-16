@@ -25,14 +25,20 @@ export default function LogoScrollWrapper() {
         const logoW = () => el.offsetWidth;
         const logoH = () => el.offsetHeight;
 
-        const startX = () => vw() - logoW() - 40;          
+        const startX = () => vw() - logoW() - 70;          
         const startY = () => vh() * 0.5 - logoH() * 0.5;  
 
-        const mid1X = () => vw() * 0.50 - logoW() * 0.5;
-        const mid1Y = () => vh() * 0.55 - logoH() * 0.5;  
+        const dropX = () => vw() - logoW() - 66;
+        const dropY = () => vh() * 0.58 - logoH() * 0.5;
 
-        const endX = () => vw() * 0.03;                   
-        const endY = () => vh() * 0.5 - logoH() * 0.5;    
+        const sweepX = () => vw() * 0.46 - logoW() * 0.5;
+        const sweepY = () => vh() * 0.64 - logoH() * 0.5;
+
+        const hookX = () => vw() * 0.18 - logoW() * 0.5;
+        const hookY = () => vh() * 0.74 - logoH() * 0.5;
+
+        const endX = () => vw() * 0.10 - logoW() * 0.5;
+        const endY = () => vh() * 0.88 - logoH() * 0.5;
 
         gsap.set(el, { x: startX(), y: startY(), autoAlpha: 1 });
 
@@ -49,11 +55,13 @@ export default function LogoScrollWrapper() {
         tl.to(el, {
             motionPath: {
                 path: [
-                    { x: startX(), y: startY() },   // right side
-                    { x: mid1X(), y: mid1Y() },      // center
-                    { x: endX(), y: endY() },      // left side
+                    { x: startX(), y: startY() },   // right-middle start
+                    { x: dropX(), y: dropY() },     // short drop first on right
+                    { x: sweepX(), y: sweepY() },   // wide sweep towards left
+                    { x: hookX(), y: hookY() },     // tighten into left-side curve
+                    { x: endX(), y: endY() },       // final downward segment on left
                 ],
-                curviness: 1.2,
+                curviness: 1.45,
                 autoRotate: false,
             },
             ease: "power1.inOut",
